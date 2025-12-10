@@ -1,0 +1,9 @@
+{
+  "name": "gpx",
+  "version": "0.1.0",
+  "dependencies": [
+    "boost",
+    "tinyxml2",
+    "via-httplib"
+  ]
+}
