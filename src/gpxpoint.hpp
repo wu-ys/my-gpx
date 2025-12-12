@@ -6,6 +6,10 @@ class GPXPoint {
 
 public:
 
+    GPXPoint() : lat(0.0), lon(0.0), ele(0.0), time(0) {}
+
+    ~GPXPoint() {}
+
     GPXPoint(double latitude, double longitude, double elevation, long long timestamp)
         : lat(latitude), lon(longitude), ele(elevation), time(timestamp) {}
 
