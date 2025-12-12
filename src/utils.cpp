@@ -22,6 +22,23 @@ long long to_timestamp_millis(const std::string& iso8601) {
     return to_timestamp_seconds(iso8601) * 1000LL;
 }
 
+std::string from_timestamp_seconds(long long timestamp) {
+    std::time_t t = static_cast<std::time_t>(timestamp);
+    std::tm* gm_time = gmtime(&t); // Convert to UTC
+
+    char buffer[30];
+    std::strftime(buffer, sizeof(buffer), "%Y-%m-%dT%H:%M:%SZ", gm_time);
+    return std::string(buffer);
+}
+
+std::string from_timestamp_millis(long long timestamp) {
+    long long seconds = timestamp / 1000LL;
+    return from_timestamp_seconds(seconds);
+}
+
+double kmph_to_mps(double kmph) { return kmph / 3.6; }
+double mps_to_kmph(double mps) { return mps * 3.6; }
+
 double ComputePointDistance(double lat1, double lon1, double lat2, double lon2) {
 
     const double pi = 3.14159265358979323846;
