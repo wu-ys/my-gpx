@@ -26,6 +26,8 @@ public:
     friend double ComputeVerticalSpeed(const GPXPoint& p1, const GPXPoint& p2);
     friend double ComputeHorizontalSpeedRate(const GPXPoint& p1, const GPXPoint& p2);
 
+    friend std::ostream& operator<<(std::ostream& os, const GPXPoint& point);
+
 private:
 
     double lat;

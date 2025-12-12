@@ -34,6 +34,7 @@ public:
     virtual GPXPoint getStartPoint() const override;
     virtual GPXPoint getEndPoint() const override;
     virtual double getTotalDistance() const override;
+    virtual std::ostream& operator<<(std::ostream& os) const override;
 
     void interpolatePoints(int numPoints);
     void interpolatePoints(double intervalDistance);

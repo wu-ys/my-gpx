@@ -53,5 +53,9 @@ void LineSegment::interpolatePoints(double intervalDistance) {
 
 }
 
+std::ostream& LineSegment::operator<<(std::ostream& os) const {
+    os << "LineSegment:\n\t" << startPoint << " -> " << endPoint << ",\n\tDistance: " << getTotalDistance() << " meters" << std::endl;
+
+    return os;
 
 }
