@@ -16,4 +16,10 @@ long long BaseSegment::getStartTime() const { return getStartPoint().getTime(); 
 long long BaseSegment::getEndTime() const { return getEndPoint().getTime(); }
 double BaseSegment::getTotalTime() const { return getEndTime() - getStartTime(); }
 
+const std::vector<GPXPoint>& BaseSegment::getPoints() const { return points; }
+const GPXPoint& BaseSegment::getPoint(size_t index) const {
+    validateIndex(index, points.size());
+    return points[index];
+}
+
 }
