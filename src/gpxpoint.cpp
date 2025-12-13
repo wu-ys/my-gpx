@@ -46,7 +46,7 @@ namespace mygpx {
         if (point.lon > 0) os << "E";
         else if (point.lon < 0) os << "W";
 
-        os << ", " << point.ele << " m, ";
+        os << ", " << point.ele << "m, ";
 
         os << from_timestamp_seconds(point.time) << ")";
         return os;

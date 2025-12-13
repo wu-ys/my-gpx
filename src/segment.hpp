@@ -36,8 +36,6 @@ public:
     virtual const std::vector<GPXPoint>& getPoints() const;
     virtual const GPXPoint& getPoint(size_t index) const;
 
-    virtual std::ostream& operator<<(std::ostream& os) const = 0;
-
 };
 
 }

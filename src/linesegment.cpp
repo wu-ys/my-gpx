@@ -53,8 +53,8 @@ void LineSegment::interpolatePoints(double intervalDistance) {
 
 }
 
-std::ostream& LineSegment::operator<<(std::ostream& os) const {
-    os << "LineSegment:\n\t" << startPoint << " -> " << endPoint << ",\n\tDistance: " << getTotalDistance() << " meters" << std::endl;
+std::ostream& operator<<(std::ostream& os, const LineSegment& segment) {
+    os << "LineSegment:\n\t" << segment.getStartPoint() << " -> " << segment.getEndPoint() << ",\n\tDistance: " << segment.getTotalDistance() << " meters, Point count: " << segment.getPointCount() << std::endl;
 
     return os;
 
