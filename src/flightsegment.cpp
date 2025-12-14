@@ -1,5 +1,5 @@
 #include "flightsegment.hpp"
-#include "rapidcsv.h"
+#include <rapidcsv.h>
 
 namespace mygpx {
 

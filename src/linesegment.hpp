@@ -1,3 +1,4 @@
+#pragma once
 #include "config.hpp"
 #include "segment.hpp"
 #include "gpxpoint.hpp"

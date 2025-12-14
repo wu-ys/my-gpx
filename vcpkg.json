@@ -1,9 +1,10 @@
 {
-  "name": "gpx",
+  "name": "mygpx",
   "version": "0.1.0",
   "dependencies": [
     "boost",
     "tinyxml2",
+    "rapidcsv",
     "via-httplib"
   ]
 }

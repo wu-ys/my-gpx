@@ -59,3 +59,5 @@ std::ostream& operator<<(std::ostream& os, const LineSegment& segment) {
     return os;
 
 }
+
+}

@@ -36,6 +36,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/external/httplib)
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/src")
 
 find_package(tinyxml2 CONFIG REQUIRED)
+find_path(RAPIDCSV_INCLUDE_DIRS "rapidcsv.h")
 
 add_subdirectory(src)
 option(BUILD_EXAMPLES "Build examples" ON)

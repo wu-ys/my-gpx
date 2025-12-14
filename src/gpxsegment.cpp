@@ -1,6 +1,5 @@
 #include "gpxsegment.hpp"
 #include "gpxloader.hpp"
-#include <tinyxml2.h>
 
 namespace mygpx {
 

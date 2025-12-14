@@ -8,6 +8,8 @@ set(CURRENT_LIB_NAME mp_gpx_lib)
 add_library(${CURRENT_LIB_NAME} SHARED ${source_files})
 
 # target_include_directories(${CURRENT_LIB_NAME} PRIVATE ${LARDOS_EXTERNAL_INCLUDE_DIRS} ${LARDOS_INCLUDE_DIR})
+target_link_libraries(${CURRENT_LIB_NAME} PRIVATE tinyxml2::tinyxml2)
+target_include_directories(${CURRENT_LIB_NAME} PRIVATE ${RAPIDCSV_INCLUDE_DIRS})
 
 set_target_properties(${CURRENT_LIB_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 
