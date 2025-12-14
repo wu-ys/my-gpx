@@ -1,11 +1,6 @@
 #include "gpxpoint.hpp"
-#include "utils.hpp"
 
 namespace mygpx {
-
-    GPXPoint::GPXPoint(double latitude, double longitude, double elevation, const std::string& iso8601)
-        : lat(latitude), lon(longitude), ele(elevation), time(to_timestamp_seconds(iso8601)) {}
-
 
     double ComputePointDistance(const GPXPoint& p1, const GPXPoint& p2) {
         return ComputePointDistance(p1.lat, p1.lon, p2.lat, p2.lon);
