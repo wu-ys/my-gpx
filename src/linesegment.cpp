@@ -26,13 +26,13 @@ void LineSegment::interpolatePoints(int numPoints) {
 
     double latStep = (endPoint.getLatitude() - startPoint.getLatitude()) / (numPoints - 1);
     double lonStep = (endPoint.getLongitude() - startPoint.getLongitude()) / (numPoints - 1);
-    double eleStep = (endPoint.getElevation() - startPoint.getElevation()) / (numPoints - 1);
+    float eleStep = (endPoint.getElevation() - startPoint.getElevation()) / (numPoints - 1);
     double timeStep = ComputeTimeDifference(startPoint, endPoint) / (double)(numPoints - 1);
 
     for (int i = 0; i < numPoints; ++i) {
         double lat = startPoint.getLatitude() + i * latStep;
         double lon = startPoint.getLongitude() + i * lonStep;
-        double ele = startPoint.getElevation() + i * eleStep;
+        float ele = startPoint.getElevation() + i * eleStep;
         long long time = startPoint.getTime() + static_cast<long long>(i * timeStep);
 
         points[i] = GPXPoint(lat, lon, ele, time);
