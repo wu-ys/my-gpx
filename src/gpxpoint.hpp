@@ -33,6 +33,8 @@ public:
 
     friend std::ostream& operator<<(std::ostream& os, const GPXPoint& point);
 
+    std::string QueryAddress() const;
+
 private:
 
     double lat;

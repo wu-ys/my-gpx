@@ -5,6 +5,7 @@
     "boost",
     "tinyxml2",
     "rapidcsv",
-    "via-httplib"
+    "cpp-httplib",
+    "openssl"
   ]
 }

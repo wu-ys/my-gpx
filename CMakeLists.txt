@@ -3,7 +3,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
-project(gpx CXX)
+project(mygpx CXX)
 
 SET(BUILD_VERSION "v0.0.1")
 # Find Git Version Patch
@@ -36,9 +36,12 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/external/httplib)
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/src")
 
 find_package(tinyxml2 CONFIG REQUIRED)
+find_package(httplib CONFIG REQUIRED)
+find_package(OpenSSL REQUIRED)
 find_path(RAPIDCSV_INCLUDE_DIRS "rapidcsv.h")
 
 add_subdirectory(src)
+
 option(BUILD_EXAMPLES "Build examples" ON)
 if(BUILD_EXAMPLES)
   add_subdirectory(examples)
