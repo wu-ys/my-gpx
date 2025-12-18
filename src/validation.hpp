@@ -1,6 +1,6 @@
 #pragma once
-#include <exception>
 #include <stdexcept>
+#include <string>
 
 namespace mygpx {
 
@@ -28,7 +28,7 @@ inline void validateIndex(size_t index, size_t maxSize) {
 
 }
 
-inline void validateInRange(size_t index, size_t min_arg, size_t max_arg = SIZE_MAX) {
+inline void validateInRange(size_t index, size_t min_arg, size_t max_arg = SIZE_MAX, std::string message = "") {
 
     if (index > max_arg)
         throw std::invalid_argument("Input: " + std::to_string(index) +
@@ -36,6 +36,20 @@ inline void validateInRange(size_t index, size_t min_arg, size_t max_arg = SIZE_
 
     if (index < min_arg)
         throw std::invalid_argument("Input: " + std::to_string(index) +
+            " is less than minimal limit: " + std::to_string(min_arg) + ".");
+
+    return;
+
+}
+
+inline void validateInRange(double value, double min_arg, double max_arg, std::string message = "") {
+
+    if (value > max_arg)
+        throw std::invalid_argument("Input: " + std::to_string(value) +
+            " is greater than maximal limit: " + std::to_string(max_arg) + ".");
+
+    if (value < min_arg)
+        throw std::invalid_argument("Input: " + std::to_string(value) +
             " is less than minimal limit: " + std::to_string(min_arg) + ".");
 
     return;

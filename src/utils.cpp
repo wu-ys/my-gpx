@@ -77,7 +77,7 @@ std::pair<double, double> gcj02_to_wgs84(double lat, double lon) {
         dlon = (dlon * 180.0) / (a / sqrtmagic * cos(radlat) * PI);
         double mglat = lat + dlat;
         double mglon = lon + dlon;
-        return std::make_pair(lon * 2 - mglon, lat * 2 - mglat);
+        return std::make_pair(lat * 2 - mglat, lon * 2 - mglon);
     }
 }
 
@@ -96,7 +96,7 @@ std::pair<double, double> wgs84_to_gcj02(double lat, double lon) {
     dlon = (dlon * 180.0) / (a / sqrtmagic * cos(radlat) * PI);
     double mglat = lat + dlat;
     double mglon = lon + dlon;
-    return std::make_pair(mglon, mglat);
+    return std::make_pair(mglat, mglon);
 }
 
 double ComputePointDistance(double lat1, double lon1, double lat2, double lon2) {
