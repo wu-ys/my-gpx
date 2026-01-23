@@ -16,6 +16,10 @@ public:
 
     void loadFromVariflightCSV(const std::string& filename);
 
+    virtual std::string getType() const override {
+        return "Flight";
+    }
+
 };
 
 }

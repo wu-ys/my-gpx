@@ -37,6 +37,10 @@ public:
     virtual double getTotalDistance() const override;
     friend std::ostream& operator<<(std::ostream& os, const LineSegment& segment);
 
+    virtual std::string getType() const override {
+        return "Line";
+    }
+
     void interpolatePoints(int numPoints);
     void interpolatePoints(double intervalDistance);
 

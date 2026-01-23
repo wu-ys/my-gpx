@@ -65,6 +65,10 @@ public:
     virtual GPXPoint getEndPoint() const override;
     virtual double getTotalDistance() const override;
 
+    virtual std::string getType() const override {
+        return "GPX recorder";
+    }
+
 
 };
 

@@ -19,6 +19,8 @@ public:
     virtual GPXPoint getEndPoint() const = 0;
 
     virtual double getTotalDistance() const = 0;
+
+    virtual std::string getType() const = 0;
     
     double getStartLat() const;
     double getStartLon() const;
