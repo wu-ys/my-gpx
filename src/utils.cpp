@@ -1,4 +1,5 @@
 #include "utils.hpp"
+#include "validation.hpp"
 #include <cmath>
 #include <fstream>
 #include <sstream>
@@ -40,68 +41,209 @@ std::string from_timestamp_millis(long long timestamp) {
 double kmph_to_mps(double kmph) { return kmph / 3.6; }
 double mps_to_kmph(double mps) { return mps * 3.6; }
 
-bool out_of_china(double lng, double lat) {
-    return not (73.66 < lng && lng < 135.05 && 3.86 < lat && lat < 53.55);
+bool out_of_china(double lat, double lon) {
+    return not (73.66 < lon && lon < 135.05 && 3.86 < lat && lat < 53.55);
+}
+bool out_of_china(GeoPoint gp) {
+    auto [lat, lon] = gp;
+    return not (73.66 < lon && lon < 135.05 && 3.86 < lat && lat < 53.55);
 }
 
-double transformlat(double lng, double lat) {
-    double ret = -100.0 + 2.0 * lng + 3.0 * lat + 0.2 * lat * lat + 0.1 * lng * lat + 0.2 * sqrt(abs(lng));
-    ret += (20.0 * sin(6.0 * lng * PI) + 20.0 * sin(2.0 * lng * PI)) * 2.0 / 3.0;
+double transformlat(double lat, double lon) {
+    double ret = -100.0 + 2.0 * lon + 3.0 * lat + 0.2 * lat * lat + 0.1 * lon * lat + 0.2 * sqrt(abs(lon));
+    ret += (20.0 * sin(6.0 * lon * PI) + 20.0 * sin(2.0 * lon * PI)) * 2.0 / 3.0;
     ret += (20.0 * sin(lat * PI) + 40.0 * sin(lat / 3.0 * PI)) * 2.0 / 3.0;
     ret += (160.0 * sin(lat / 12.0 * PI) + 320 * sin(lat * PI / 30.0)) * 2.0 / 3.0;
     return ret;
 }
-
-double transformlng(double lng, double lat) {
-    double ret = 300.0 + lng + 2.0 * lat + 0.1 * lng * lng + 0.1 * lng * lat + 0.1 * sqrt(abs(lng));
-    ret += (20.0 * sin(6.0 * lng * PI) + 20.0 * sin(2.0 * lng * PI)) * 2.0 / 3.0;
-    ret += (20.0 * sin(lng * PI) + 40.0 * sin(lng / 3.0 * PI)) * 2.0 / 3.0;
-    ret += (150.0 * sin(lng / 12.0 * PI) + 300.0 * sin(lng / 30.0 * PI)) * 2.0 / 3.0;
+double transformlon(double lat, double lon) {
+    double ret = 300.0 + lon + 2.0 * lat + 0.1 * lon * lon + 0.1 * lon * lat + 0.1 * sqrt(abs(lon));
+    ret += (20.0 * sin(6.0 * lon * PI) + 20.0 * sin(2.0 * lon * PI)) * 2.0 / 3.0;
+    ret += (20.0 * sin(lon * PI) + 40.0 * sin(lon / 3.0 * PI)) * 2.0 / 3.0;
+    ret += (150.0 * sin(lon / 12.0 * PI) + 300.0 * sin(lon / 30.0 * PI)) * 2.0 / 3.0;
     return ret;
 }
 
+GeoPoint gcj02_to_wgs84(double lat, double lon) {
 
-std::pair<double, double> gcj02_to_wgs84(double lat, double lon) {
-    double a = EARTH_EQUATOR_RADIUS;
-    double ee = EARTH_ECCENTRICITY;
-    if (out_of_china(lon, lat))
-        return std::make_pair(lon, lat);
-    else {
-        double dlat = transformlat(lon - 105.0, lat - 35.0);
-        double dlon = transformlng(lon - 105.0, lat - 35.0);
-        double radlat = lat / 180.0 * PI;
-        double magic = sin(radlat);
-        magic = 1 - ee * magic * magic;
-        double sqrtmagic = sqrt(magic);
-        dlat = (dlat * 180.0) / ((a * (1 - ee)) / (magic * sqrtmagic) * PI);
-        dlon = (dlon * 180.0) / (a / sqrtmagic * cos(radlat) * PI);
-        double mglat = lat + dlat;
-        double mglon = lon + dlon;
-        return std::make_pair(lat * 2 - mglat, lon * 2 - mglon);
-    }
+    validateLatitude(lat);
+    validateLongitude(lon);
+    return gcj02_to_wgs84(std::make_pair(lat,lon));
+
 }
 
-std::pair<double, double> wgs84_to_gcj02(double lat, double lon) {
+GeoPoint gcj02_to_wgs84(GeoPoint gp) {
     double a = EARTH_EQUATOR_RADIUS;
     double ee = EARTH_ECCENTRICITY;
-    if (out_of_china(lon, lat))
-        return std::make_pair(lon, lat);
-    double dlat = transformlat(lon - 105.0, lat - 35.0);
-    double dlon = transformlng(lon - 105.0, lat - 35.0);
+    if (out_of_china(gp))
+        return gp;
+    auto& [lat, lon] = gp;
+    double dlat = transformlat(lat - 35.0, lon - 105.0);
+    double dlon = transformlon(lat - 35.0, lon - 105.0);
     double radlat = lat / 180.0 * PI;
     double magic = sin(radlat);
     magic = 1 - ee * magic * magic;
     double sqrtmagic = sqrt(magic);
     dlat = (dlat * 180.0) / ((a * (1 - ee)) / (magic * sqrtmagic) * PI);
     dlon = (dlon * 180.0) / (a / sqrtmagic * cos(radlat) * PI);
-    double mglat = lat + dlat;
-    double mglon = lon + dlon;
-    return std::make_pair(mglat, mglon);
+    lat -= dlat;
+    lon -= dlon;
+    return gp;
+
+}
+
+GeoPoint wgs84_to_gcj02(double lat, double lon) {
+
+    validateLatitude(lat);
+    validateLongitude(lon);
+    return wgs84_to_gcj02(std::make_pair(lat,lon));
+
+}
+
+GeoPoint wgs84_to_gcj02(GeoPoint gp) {
+    double a = EARTH_EQUATOR_RADIUS;
+    double ee = EARTH_ECCENTRICITY;
+    if (out_of_china(gp))
+        return gp;
+    auto& [lat, lon] = gp;
+    double dlat = transformlat(lat - 35.0, lon - 105.0);
+    double dlon = transformlon(lat - 35.0, lon - 105.0);
+    double radlat = lat / 180.0 * PI;
+    double magic = sin(radlat);
+    magic = 1 - ee * magic * magic;
+    double sqrtmagic = sqrt(magic);
+    dlat = (dlat * 180.0) / ((a * (1 - ee)) / (magic * sqrtmagic) * PI);
+    dlon = (dlon * 180.0) / (a / sqrtmagic * cos(radlat) * PI);
+    lat += dlat;
+    lon += dlon;
+    return gp;
+}
+
+// TODO
+GeoPoint bd09_to_wgs84(double lat, double lon) {
+    validateLatitude(lat);
+    validateLongitude(lon);
+    return bd09_to_wgs84(std::make_pair(lat,lon));
+}
+GeoPoint bd09_to_gcj02(double lat, double lon) {
+    validateLatitude(lat);
+    validateLongitude(lon);
+    return bd09_to_gcj02(std::make_pair(lat,lon));
+}
+GeoPoint wgs84_to_bd09(double lat, double lon) {
+    validateLatitude(lat);
+    validateLongitude(lon);
+    return wgs84_to_bd09(std::make_pair(lat,lon));
+}
+GeoPoint gcj02_to_bd09(double lat, double lon) {
+    validateLatitude(lat);
+    validateLongitude(lon);
+    return gcj02_to_bd09(std::make_pair(lat,lon));
+}
+
+GeoPoint bd09_to_wgs84(GeoPoint gp) {
+    return gcj02_to_wgs84(gp);
+}
+GeoPoint bd09_to_gcj02(GeoPoint gp) {
+    return gp;
+}
+GeoPoint wgs84_to_bd09(GeoPoint gp) {
+    return wgs84_to_gcj02(gp);
+}
+GeoPoint gcj02_to_bd09(GeoPoint gp) {
+    return gp;
+}
+
+GeoPoint to_wgs84(double lat, double lon, CoordinateSystem coord) {
+
+    validateLatitude(lat);
+    validateLongitude(lon);
+    return to_wgs84(std::make_pair(lat,lon), coord);
+
+}
+GeoPoint to_wgs84(GeoPoint gp, CoordinateSystem coord) {
+
+    std::pair<double,double> result = gp;
+
+    switch (coord) {
+      case CoordinateSystem::CoordinateSystem_GCJ02:
+        result = gcj02_to_wgs84(gp);
+        break;
+      case CoordinateSystem::CoordinateSystem_BD09:
+        result = bd09_to_wgs84(gp);
+        break;
+      default:
+        break;
+    }
+
+    return result;
+}
+
+GeoPoint to_gcj02(double lat, double lon, CoordinateSystem coord) {
+
+    validateLatitude(lat);
+    validateLongitude(lon);
+    return to_gcj02(std::make_pair(lat,lon), coord);
+
+}
+GeoPoint to_gcj02(GeoPoint gp, CoordinateSystem coord) {
+
+    std::pair<double,double> result = gp;
+
+    switch (coord) {
+      case CoordinateSystem::CoordinateSystem_WGS84:
+        result = wgs84_to_gcj02(gp);
+        break;
+      case CoordinateSystem::CoordinateSystem_BD09:
+        result = bd09_to_gcj02(gp);
+        break;
+      default:
+        break;
+    }
+
+    return result;
+}
+
+GeoPoint to_bd09(double lat, double lon, CoordinateSystem coord) {
+
+    validateLatitude(lat);
+    validateLongitude(lon);
+    return to_bd09(std::make_pair(lat,lon), coord);
+
+}
+GeoPoint to_bd09(GeoPoint gp, CoordinateSystem coord) {
+
+    std::pair<double,double> result = gp;
+
+    switch (coord) {
+      case CoordinateSystem::CoordinateSystem_WGS84:
+        result = wgs84_to_bd09(gp);
+        break;
+      case CoordinateSystem::CoordinateSystem_GCJ02:
+        result = gcj02_to_bd09(gp);
+        break;
+      default:
+        break;
+    }
+
+    return result;
 }
 
 double ComputePointDistance(double lat1, double lon1, double lat2, double lon2) {
 
+    validateLatitude(lat1);
+    validateLatitude(lat2);
+    validateLongitude(lon1);
+    validateLongitude(lon2);
+
+    return ComputePointDistance(std::make_pair(lat1,lon1), std::make_pair(lat2, lon2));
+
+}
+double ComputePointDistance(GeoPoint gp1, GeoPoint gp2) {
+
     const double R = EARTH_AVERAGE_RADIUS; // Earth radius in meters
+    const auto&[lat1, lon1] = gp1;
+    const auto&[lat2, lon2] = gp2;
     double lat1_rad = lat1 * PI / 180.0;
     double lon1_rad = lon1 * PI / 180.0;
     double lat2_rad = lat2 * PI / 180.0;
