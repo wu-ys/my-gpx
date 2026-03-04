@@ -27,7 +27,7 @@ public:
     bool getLoadCourse() const { return loadCourse; }
 
     // load as one segment
-    std::vector<GPXPoint> loadSegmentFromFile(const std::string& filename);
+    bool loadSegmentFromFile(std::vector<GPXPoint>& points, const std::string& filename);
 
     // load multiple segments
     std::vector<GPXSegment> loadSegmentsFromFile(const std::string& filename);

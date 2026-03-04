@@ -12,9 +12,18 @@ double BaseSegment::getTotalLatDiff() const { return getEndLat() - getStartLat()
 double BaseSegment::getTotalLonDiff() const { return getEndLon() - getStartLon(); }
 double BaseSegment::getTotalEleDiff() const { return getEndEle() - getStartEle(); }
 
-long long BaseSegment::getStartTime() const { return getStartPoint().getTime(); }
-long long BaseSegment::getEndTime() const { return getEndPoint().getTime(); }
-double BaseSegment::getTotalTime() const { return getEndTime() - getStartTime(); }
+long long BaseSegment::getStartTime() const { 
+    if (!has_time) throw std::runtime_error("Segment does not have time information.");
+    else return getStartPoint().getTime(); 
+}
+long long BaseSegment::getEndTime() const { 
+    if (!has_time) throw std::runtime_error("Segment does not have time information.");
+    else return getEndPoint().getTime(); 
+}
+double BaseSegment::getTotalTime() const { 
+    if (!has_time) throw std::runtime_error("Segment does not have time information.");
+    return getEndTime() - getStartTime();
+}
 
 const std::vector<GPXPoint>& BaseSegment::getPoints() const { return points; }
 const GPXPoint& BaseSegment::getPoint(size_t index) const {

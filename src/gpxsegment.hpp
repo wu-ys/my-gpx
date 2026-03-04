@@ -15,14 +15,16 @@ public:
     GPXSegment(const std::string& name) { loadFromGPXFile(name); }
 
     GPXSegment(const std::vector<GPXPoint>& newPoints) {
+        has_time = true;
         addPoints(newPoints);
     }
 
     GPXSegment(const std::vector<double>& latitudes,
                const std::vector<double>& longitudes,
                const std::vector<float>& elevations,
-               const std::vector<long long>& timestamps) 
+               const std::vector<long long>& timestamps = {}) 
     {
+        has_time = true;
         addPoints(latitudes, longitudes, elevations, timestamps);
     }
 
@@ -33,6 +35,7 @@ public:
                const std::vector<float>& speeds,
                const std::vector<float>& courses) 
     {
+        has_time = true;
         addPoints(latitudes, longitudes, elevations, timestamps, speeds, courses);
     }
 
@@ -52,7 +55,7 @@ public:
     void addPoints(const std::vector<double>& latitudes,
                    const std::vector<double>& longitudes,
                    const std::vector<float>& elevations,
-                   const std::vector<long long>& timestamps);
+                   const std::vector<long long>& timestamps = {});
     void addPoints(const std::vector<double>& latitudes,
                    const std::vector<double>& longitudes,
                    const std::vector<float>& elevations,
@@ -68,6 +71,13 @@ public:
     virtual std::string getType() const override {
         return "GPX recorder";
     }
+    
+    void SetInterval(double distance);
+
+    // add movement detector functions later
+    void DetectStopAndMovements() const;
+    
+
 
 
 };

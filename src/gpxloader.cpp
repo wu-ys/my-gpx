@@ -3,9 +3,9 @@
 
 namespace mygpx {
 
-std::vector<GPXPoint> GPXLoader::loadSegmentFromFile(const std::string& filename) {
-    std::vector<GPXPoint> points;
-
+bool GPXLoader::loadSegmentFromFile(std::vector<GPXPoint>& points, const std::string& filename) {
+    
+    bool has_time = true;
     tinyxml2::XMLDocument doc;
     if (doc.LoadFile(filename.c_str()) != tinyxml2::XML_SUCCESS) {
         throw std::runtime_error("Failed to load GPX file.");
@@ -37,6 +37,7 @@ std::vector<GPXPoint> GPXLoader::loadSegmentFromFile(const std::string& filename
                 // time may not exist
                 auto* qtime = trkpt->FirstChildElement("time");
                 if (qtime) time = qtime->GetText();
+                else has_time = false;
 
                 // how to use the information from extensions?
                 auto* qext = trkpt->FirstChildElement("extensions");
@@ -57,7 +58,7 @@ std::vector<GPXPoint> GPXLoader::loadSegmentFromFile(const std::string& filename
         }
     }
 
-    return points;
+    return has_time;
 
 }
 

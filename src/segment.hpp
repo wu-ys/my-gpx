@@ -9,6 +9,7 @@ class BaseSegment {
 
 protected:
     std::vector<GPXPoint> points;
+    bool has_time = true;
 
 public:
     BaseSegment() {}
