@@ -22,7 +22,7 @@ public:
     virtual double getTotalDistance() const = 0;
 
     virtual std::string getType() const = 0;
-    
+
     double getStartLat() const;
     double getStartLon() const;
     double getStartEle() const;
@@ -32,11 +32,11 @@ public:
     double getTotalLatDiff() const;
     double getTotalLonDiff() const;
     double getTotalEleDiff() const;
-    
+
     long long getStartTime() const;
     long long getEndTime() const;
     int getTotalTime() const;
-    
+
     virtual const std::vector<GPXPoint>& getPoints() const;
     virtual const GPXPoint& getPoint(size_t index) const;
 

@@ -12,15 +12,15 @@ double BaseSegment::getTotalLatDiff() const { return getEndLat() - getStartLat()
 double BaseSegment::getTotalLonDiff() const { return getEndLon() - getStartLon(); }
 double BaseSegment::getTotalEleDiff() const { return getEndEle() - getStartEle(); }
 
-long long BaseSegment::getStartTime() const { 
+long long BaseSegment::getStartTime() const {
     if (!has_time) throw std::runtime_error("Segment does not have time information.");
-    else return getStartPoint().getTime(); 
+    else return getStartPoint().getTime();
 }
-long long BaseSegment::getEndTime() const { 
+long long BaseSegment::getEndTime() const {
     if (!has_time) throw std::runtime_error("Segment does not have time information.");
-    else return getEndPoint().getTime(); 
+    else return getEndPoint().getTime();
 }
-int BaseSegment::getTotalTime() const { 
+int BaseSegment::getTotalTime() const {
     if (!has_time) throw std::runtime_error("Segment does not have time information.");
     return getEndTime() - getStartTime();
 }
