@@ -20,7 +20,7 @@ long long BaseSegment::getEndTime() const {
     if (!has_time) throw std::runtime_error("Segment does not have time information.");
     else return getEndPoint().getTime(); 
 }
-double BaseSegment::getTotalTime() const { 
+int BaseSegment::getTotalTime() const { 
     if (!has_time) throw std::runtime_error("Segment does not have time information.");
     return getEndTime() - getStartTime();
 }

@@ -35,7 +35,7 @@ public:
     
     long long getStartTime() const;
     long long getEndTime() const;
-    double getTotalTime() const;
+    int getTotalTime() const;
     
     virtual const std::vector<GPXPoint>& getPoints() const;
     virtual const GPXPoint& getPoint(size_t index) const;
