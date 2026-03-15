@@ -100,13 +100,6 @@ double GPXSegment::getTotalDistance() const {
 
 }
 
-void GPXSegment::loadFromGPXFile(const std::string& filename) {
-
-    GPXLoader loader;
-
-    has_time = loader.loadSegmentFromFile(points, filename);
-
-}
 
 void GPXSegment::SetInterval(double distance = 50) {
     validateInRange(distance, 25, 2000);

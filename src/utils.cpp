@@ -6,6 +6,9 @@
 namespace mygpx {
 
 long long to_timestamp_seconds(const std::string& iso8601) {
+
+    if (iso8601.empty()) return 0;
+
     std::tm tm = {};
     std::istringstream ss(iso8601);
 
@@ -21,6 +24,8 @@ long long to_timestamp_seconds(const std::string& iso8601) {
 }
 
 long long to_timestamp_millis(const std::string& iso8601) {
+    if (iso8601.empty()) return 0;
+
     return to_timestamp_seconds(iso8601) * 1000LL;
 }
 

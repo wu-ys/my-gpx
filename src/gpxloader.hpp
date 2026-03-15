@@ -2,6 +2,7 @@
 #include "config.hpp"
 #include "gpxsegment.hpp"
 #include "gpxpoint.hpp"
+#include "track.hpp"
 #include "validation.hpp"
 
 namespace mygpx {
@@ -12,6 +13,13 @@ private:
     // config and result
     bool loadSpeed;
     bool loadCourse;
+    bool loadTime;
+    bool loadEle;
+
+    bool speedLoaded;
+    bool courseLoaded;
+    bool timeLoaded;
+    bool eleLoaded;
 
 public:
 
@@ -19,18 +27,25 @@ public:
     ~GPXLoader() {}
 
     // set whether to load extension data
-    void setLoadSpeed(bool enable) { loadSpeed = enable; }
+    void setLoadSpeed(bool enable)  { loadSpeed  = enable; }
     void setLoadCourse(bool enable) { loadCourse = enable; }
+    void setLoadEle(bool enable)    { loadEle    = enable; }
+    void setLoadTime(bool enable)   { loadTime   = enable; }
 
-    // get current settings / see whether spped and course are successfully loaded
-    bool getLoadSpeed() const { return loadSpeed; }
-    bool getLoadCourse() const { return loadCourse; }
+    // see whether speed and course are successfully loaded
+    bool getSpeedLoaded() const  { return speedLoaded;  }
+    bool getCourseLoaded() const { return courseLoaded; }
+    bool getEleLoaded() const    { return eleLoaded;    }
+    bool getTimeLoaded() const   { return timeLoaded;   }
 
     // load as one segment
-    bool loadSegmentFromFile(std::vector<GPXPoint>& points, const std::string& filename);
+    GPXSegment loadSegmentFromFile(const std::string& filename);
 
-    // load multiple segments
-    std::vector<GPXSegment> loadSegmentsFromFile(const std::string& filename);
+    // // load multiple segments
+    // std::vector<GPXSegment> loadSegmentsFromFile(const std::string& filename);
+
+    // load multiple tracks
+    std::vector<Track> loadTracksFromFile(const std::string& filename);
 
 };
 

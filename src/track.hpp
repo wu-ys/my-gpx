@@ -14,6 +14,9 @@ class Track {
 
   public:
 
+    Track() {}
+    ~Track() {}
+
     size_t getPointCount() const;
     GPXPoint getStartPoint() const;
     GPXPoint getEndPoint() const;
@@ -54,6 +57,10 @@ class Track {
 
     const std::vector<GPXPoint>& getPoints() const;
     const GPXPoint& getPoint(size_t index) const;
+
+  public:
+
+    friend class GPXLoader;
 
 };
 
