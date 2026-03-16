@@ -62,6 +62,17 @@ class Track {
 
     friend class GPXLoader;
 
+    void addSegment(std::shared_ptr<BaseSegment> seg);
+
+    void addSegment(std::shared_ptr<BaseSegment> seg, size_t idx);
+
+    void addSegmentByTime(std::shared_ptr<BaseSegment> seg);
+
+    std::shared_ptr<BaseSegment> getSegment(size_t idx);
+    std::string getSegmentType(size_t idx);
+
+    void toGPX(const std::string& filename) const;
+
 };
 
 }

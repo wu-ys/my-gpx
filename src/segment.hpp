@@ -40,6 +40,10 @@ public:
     virtual const std::vector<GPXPoint>& getPoints() const;
     virtual const GPXPoint& getPoint(size_t index) const;
 
+public:
+
+    void toGPX(const std::string& filename) const;
+
 };
 
 }

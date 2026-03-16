@@ -9,6 +9,8 @@ int main() {
     for (auto t : tracks)
       std::cout << "Track with " << t.getPointCount() << " points.\n";
 
+    tracks[0].toGPX("file/example-track-output.gpx");
+
     return 0;
 
 }

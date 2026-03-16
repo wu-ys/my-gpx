@@ -8,6 +8,8 @@ int main() {
 
     std::cout << "Segment with " << segment.getPointCount() << " points.\n";
 
+    segment.toGPX("file/example-segment-output.gpx");
+
     return 0;
 
 }
