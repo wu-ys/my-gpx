@@ -1,14 +1,8 @@
 #pragma once
 #include "config.hpp"
+#include "poi.hpp"
 
 namespace mygpx {
-
-    struct POI {
-        std::string name;
-        double lat;
-        double lon;
-        double distance;
-    };
 
     std::string queryAddress(double latitude, double longitude);
 
