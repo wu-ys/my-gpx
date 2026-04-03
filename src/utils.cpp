@@ -3,6 +3,8 @@
 #include <cmath>
 #include <fstream>
 #include <sstream>
+
+#include <cctype>
 namespace mygpx {
 
 long long to_timestamp_seconds(const std::string& iso8601) {
@@ -279,6 +281,21 @@ std::string getAmapAPIKey() {
     infile.close();
     return apiKey;
 
+}
+
+int charToA1Z26(char c) {
+    if (std::isalpha(static_cast<unsigned char>(c))) {
+        c = std::tolower(static_cast<unsigned char>(c));
+        return c - 'a' + 1;
+    } else throw std::out_of_range("");
+    return 0;
+}
+
+char A1Z26ToChar(int n) {
+    if (n >= 1 && n <= 26) {
+        return 'A' + (n - 1);
+    } else throw std::out_of_range("");
+    return '?';
 }
 
 

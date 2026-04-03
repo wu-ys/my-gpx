@@ -54,5 +54,8 @@ double ComputePointDistance(GeoPoint gp1, GeoPoint gp2);
 
 std::string getAmapAPIKey();
 
+int charToA1Z26(char c);
+char A1Z26ToChar(int i);
+
 
 }
