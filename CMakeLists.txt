@@ -35,11 +35,26 @@ message("BUILD_VERSION:${BUILD_VERSION}")
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/external/httplib)
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/src")
 
+find_package(nlohmann_json CONFIG REQUIRED)
 find_package(tinyxml2 CONFIG REQUIRED)
 find_package(httplib CONFIG REQUIRED)
 find_package(OpenSSL REQUIRED)
+find_package(SOCI REQUIRED COMPONENTS sqlite3)
 find_path(RAPIDCSV_INCLUDE_DIRS "rapidcsv.h")
 
+if(TARGET SOCI::soci_core)
+    message(STATUS "FOUND soci_core")
+else()
+    message(STATUS "NOT FOUND soci_core")
+endif()
+
+if(TARGET tinyxml2::tinyxml2)
+    message(STATUS "FOUND tinyxml2")
+else()
+    message(STATUS "NOT FOUND tinyxml2")
+endif()
+
+message(STATUS "CMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE}")
 add_subdirectory(src)
 
 option(BUILD_EXAMPLES "Build examples" ON)

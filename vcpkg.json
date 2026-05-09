@@ -3,9 +3,16 @@
   "version": "0.1.0",
   "dependencies": [
     "boost",
-    "tinyxml2",
-    "rapidcsv",
     "cpp-httplib",
-    "openssl"
+    "openssl",
+    "rapidcsv",
+    "nlohmann-json",
+    "tinyxml2",
+    {
+      "name": "soci",
+      "features": [
+        "sqlite3"
+      ]
+    }
   ]
 }
