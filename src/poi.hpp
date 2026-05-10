@@ -37,26 +37,31 @@ namespace mygpx {
 
 // ---- POI Type enum (8-bit) ----
 enum class POIType : uint8_t {
-    Frequent        = 0x00, // 0000 0000
+    Frequent        = 0x01, // 0000 0001
     RailwayStation  = 0x99, // 1001 1001
     SubwayStation   = 0x9A, // 1001 1010
-    Airport         = 0xA0, // 1010 0000
+    Airport         = 0xA1, // 1010 0001
     RailwayWaypoint = 0xC9, // 1100 1001
     SubwayWaypoint  = 0xCA, // 1100 1010
 
+    All             = 0x00, // 1111 1111
+    WaypointMask    = 0xC0, // 1100 0000
+    TrafficHubMask  = 0x80, // 1000 0000
+
 };
 
-// Check if a type byte is a waypoint
+// Type-byte categorization — uint8_t overloads first so POIType wrappers can delegate
+inline bool isWaypoint(uint8_t t)    { return (t & 0xF0) == 0xC0; }   // 1100 xxxx
+inline bool isRailway (uint8_t t)    { return (t & 0x8F) == 0x89; }   // 1xxx 1001
+inline bool isSubway  (uint8_t t)    { return (t & 0x8F) == 0x8A; }   // 1xxx 1010
+inline bool isAirport (uint8_t t)    { return (t == 0xA1); }          // 1010 0001
+inline bool isTrafficHub (uint8_t t) { return (t & 0xC0) == 0x80; }   // 10xx xxxx
+
 inline bool isWaypoint(POIType t)    { return isWaypoint(static_cast<uint8_t>(t)); }
 inline bool isRailway(POIType t)     { return isRailway(static_cast<uint8_t>(t)); }
 inline bool isSubway(POIType t)      { return isSubway(static_cast<uint8_t>(t)); }
 inline bool isAirport(POIType t)     { return isAirport(static_cast<uint8_t>(t)); }
 inline bool isTrafficHub(POIType t)  { return isTrafficHub(static_cast<uint8_t>(t)); }
-inline bool isWaypoint(uint8_t t)    { return (t & 0xC0) == 0xC0; }   // 11xx xxxx
-inline bool isRailway (uint8_t t)    { return (t & 0x8F) == 0x89; }   // 1xxx 1001
-inline bool isSubway  (uint8_t t)    { return (t & 0x8F) == 0x8A; }   // 1xxx 1010
-inline bool isAirport (uint8_t t)    { return (t == 0xA0); }          // 1010 0000
-inline bool isTrafficHub (uint8_t t) { return (t & 0xC0) == 0x80; }   // 10xx xxxx
 
 // ---- Bit layout constants ----
 namespace poi_bits {

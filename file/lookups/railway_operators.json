@@ -1,0 +1,62 @@
+{
+  "CN": [
+    {"code": "cr", "zh": "中国铁路", "en": "China Railway"},
+    {"code": "gi", "zh": "广东城际", "en": "Guangdong Intercity Railway"}
+  ],
+
+  "JP": [
+    {"id": 1,  "code": "jrh",  "zh": "JR北海道",         "en": "JR Hokkaido"},
+    {"id": 2,  "code": "jre",  "zh": "JR东日本",         "en": "JR East"},
+    {"id": 3,  "code": "jrc",  "zh": "JR东海",           "en": "JR Central"},
+    {"id": 4,  "code": "jrw",  "zh": "JR西日本",         "en": "JR West"},
+    {"id": 5,  "code": "jrs",  "zh": "JR四国",           "en": "JR Shikoku"},
+    {"id": 6,  "code": "jrk",  "zh": "JR九州",           "en": "JR Kyushu"},
+    {"id": 7,  "code": "jrf",  "zh": "JR货物",           "en": "JR Freight"},
+    {"id": 8,  "code": "tb",   "zh": "东武铁道",         "en": "Tobu Railway"},
+    {"id": 9,  "code": "sb",   "zh": "西武铁道",         "en": "Seibu Railway"},
+    {"id": 10, "code": "ks",   "zh": "京成电铁",         "en": "Keisei Electric Railway"},
+    {"id": 11, "code": "ko",   "zh": "京王电铁",         "en": "Keio Corporation"},
+    {"id": 12, "code": "od",   "zh": "小田急电铁",       "en": "Odakyu Electric Railway"},
+    {"id": 13, "code": "tk",   "zh": "东急电铁",         "en": "Tokyu Corporation"},
+    {"id": 14, "code": "kk",   "zh": "京急电铁",         "en": "Keikyu Corporation"},
+    {"id": 15, "code": "tm",   "zh": "东京地铁",         "en": "Tokyo Metro"},
+    {"id": 16, "code": "st",   "zh": "相模铁道",         "en": "Sagami Railway"},
+    {"id": 17, "code": "mt",   "zh": "名古屋铁道",       "en": "Nagoya Railroad"},
+    {"id": 18, "code": "kn",   "zh": "近畿日本铁道",     "en": "Kintetsu Railway"},
+    {"id": 19, "code": "nk",   "zh": "南海电铁",         "en": "Nankai Electric Railway"},
+    {"id": 20, "code": "hk",   "zh": "阪急电铁",         "en": "Hankyu Railway"},
+    {"id": 21, "code": "hs",   "zh": "阪神电铁",         "en": "Hanshin Electric Railway"},
+    {"id": 22, "code": "kh",   "zh": "京阪电铁",         "en": "Keihan Electric Railway"},
+    {"id": 23, "code": "nt",   "zh": "西日本铁道",       "en": "Nishi-Nippon Railroad"},
+    {"id": 24, "code": "tq",   "zh": "东京临海高速铁道", "en": "Tokyo Waterfront Area Rapid Transit"},
+    {"id": 25, "code": "sr",   "zh": "埼玉高速铁道",     "en": "Saitama Railway"},
+    {"id": 26, "code": "tr",   "zh": "东京都交通局",     "en": "Tokyo Metropolitan Bureau of Transportation"},
+    {"id": 27, "code": "yb",   "zh": "横滨市交通局",     "en": "Yokohama Municipal Subway"},
+    {"id": 28, "code": "os",   "zh": "大阪市交通局",     "en": "Osaka Municipal Subway"},
+    {"id": 29, "code": "fuk",  "zh": "福冈市交通局",     "en": "Fukuoka City Subway"},
+    {"id": 30, "code": "ky",   "zh": "京都市交通局",     "en": "Kyoto Municipal Subway"},
+    {"id": 31, "code": "sp",   "zh": "札幌市交通局",     "en": "Sapporo Municipal Subway"},
+    {"id": 32, "code": "ng",   "zh": "名古屋市交通局",   "en": "Nagoya Municipal Subway"},
+    {"id": 33, "code": "kb",   "zh": "神户市交通局",     "en": "Kobe Municipal Subway"},
+    {"id": 34, "code": "sn",   "zh": "仙台市交通局",     "en": "Sendai Municipal Subway"},
+    {"id": 35, "code": "hsn",  "zh": "北总线",           "en": "Hokuso Railway"},
+    {"id": 36, "code": "srk",  "zh": "新京成电铁",       "en": "Shin-Keisei Electric Railway"},
+    {"id": 37, "code": "ty",   "zh": "东叶高速铁道",     "en": "Toyo Rapid Railway"},
+    {"id": 38, "code": "ts",   "zh": "筑波快线",         "en": "Tsukuba Express"},
+    {"id": 39, "code": "en",   "zh": "江之岛电铁",       "en": "Enoshima Electric Railway"},
+    {"id": 40, "code": "ha",   "zh": "箱根登山铁道",     "en": "Hakone Tozan Railway"},
+    {"id": 41, "code": "iz",   "zh": "伊豆箱根铁道",     "en": "Izu-Hakone Railway"},
+    {"id": 42, "code": "fj",   "zh": "富士急行",         "en": "Fujikyu Railway"},
+    {"id": 43, "code": "na",   "zh": "长野电铁",         "en": "Nagano Electric Railway"},
+    {"id": 44, "code": "ak",   "zh": "秋田内陆纵贯铁道", "en": "Akita Nairiku Jukan Railway"},
+    {"id": 45, "code": "ao",   "zh": "青森铁道",         "en": "Aoimori Railway"},
+    {"id": 46, "code": "iw",   "zh": "岩手银河铁道",     "en": "Iwate Galaxy Railway"},
+    {"id": 47, "code": "tg",   "zh": "东京单轨电车",     "en": "Tokyo Monorail"},
+    {"id": 48, "code": "ch",   "zh": "千叶都市单轨电车", "en": "Chiba Urban Monorail"}
+  ],
+
+  "KR": [
+    {"id": 1, "code": "kr", "zh": "韩国铁道公社", "en": "KORAIL"},
+    {"id": 2, "code": "srt",    "zh": "水仁高速铁道", "en": "SRT"}
+   ]
+}

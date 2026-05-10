@@ -1,0 +1,18 @@
+{
+  "_schema": "Per-country encoding strategy for the 16-bit railway_enc field. strategy: 'flat' = single operator full-range; 'operator_line' = bit-split (op_bits+line_bits); 'range' = operator-id→partition lookup, each partition is a flat line-id range.",
+
+  "CN": {
+    "strategy": "range", "partitions": [
+      {"min": 0,     "max": 59999, "code": "cr"},
+      {"min": 60000, "max": 60199, "code": "gi"}
+    ]
+  },
+
+  "JP": {
+    "strategy": "operator_line", "op_bits": 8, "line_bits": 8
+  },
+
+  "KR": {
+    "strategy": "operator_line", "op_bits": 6, "line_bits": 10
+  }
+}
