@@ -62,14 +62,18 @@ void POIMeta::loadRailwayLayoutsFromJSON(const std::string& data_dir) {
         if (strategy == "range" || v.contains("partitions")) {
             assert(v.contains("partitions"));
 
+            uint16_t prev = 0;
+
             for (const auto& p : v["partitions"]) {
                 assert(p.contains("min"));
                 assert(p.contains("max"));
                 assert(p.contains("code"));
-                layout.partition_range.push_back(p.at("min").get<uint16_t>());
+                assert(prev == 0 || p.at("min").get<uint16_t>() > prev);
+                prev = p.at("max").get<uint16_t>();
+                layout.partition_range.push_back(prev);
                 layout.partition_op.push_back(p.at("code").get<std::string>());
             }
-            // Detect strategy: explicit "strategy" field > "range" (multi-partition)
+
             layout.strategy = strategy.empty() ? "range" : strategy;
 
         } else if (strategy == "operator_line") {

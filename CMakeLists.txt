@@ -34,6 +34,8 @@ message("BUILD_VERSION:${BUILD_VERSION}")
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/external/httplib)
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/src")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}/src/gpx")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}/src/poi")
 
 find_package(nlohmann_json CONFIG REQUIRED)
 find_package(tinyxml2 CONFIG REQUIRED)

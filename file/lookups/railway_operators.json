@@ -1,7 +1,7 @@
 {
   "CN": [
-    {"code": "cr", "zh": "中国铁路", "en": "China Railway"},
-    {"code": "gi", "zh": "广东城际", "en": "Guangdong Intercity Railway"}
+    {"id": 0, "code": "cr", "zh": "中国铁路", "en": "China Railway"},
+    {"id": 1, "code": "gi", "zh": "广东城际", "en": "Guangdong Intercity Railway"}
   ],
 
   "JP": [

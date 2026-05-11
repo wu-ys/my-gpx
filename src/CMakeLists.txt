@@ -1,7 +1,7 @@
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-file(GLOB source_files *.cpp *.h *.hpp)
+file(GLOB source_files *.cpp *.h *.hpp gpx/*.cpp gpx/*.h gpx/*.hpp poi/*.cpp poi/*.h poi/*.hpp)
 
 set(CURRENT_LIB_NAME my_gpx_lib)
 
